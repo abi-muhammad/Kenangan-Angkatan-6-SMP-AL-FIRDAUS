@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yearbook Kelas 9 - Dark Theme</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  /* Reset & basics */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    background: #1a1a1a;
+    color: #eee;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: #67d6f0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #84e7ff;
+  }
+  h1, h2, h3, h4 {
+    margin: 0 0 0.6em 0;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 2.8rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+  }
+  header {
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    border-bottom: 1px solid #333;
+  }
+  /* Profiles Section */
+  #profiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-items: center;
+  }
+  .profile-card {
+    background: #272727;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem 1rem 1.5rem;
+    max-width: 260px;
+    width: 100%;
+  }
+  .profile-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 20px rgba(0,185,255,0.5);
+  }
+  /* Highlight the first profile card (teacher) */
+  #profiles .profile-card:first-child {
+    border-top: 5px solid #47c7ff;
+    background: linear-gradient(145deg, #1e2a38, #223746);
+    box-shadow: 0 8px 20px rgba(71, 199, 255, 0.7);
+    position: relative;
+  }
+  #profiles .profile-card:first-child::before {
+    content: 'Guru';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #47c7ff;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    box-shadow: 0 0 6px #47c7ffaa;
+  }
+  .profile-photo {
+    background: #444;
+    width: 100%;
+    padding-top: 100%; /* square aspect ratio */
+    position: relative;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .profile-photo img {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .profile-info {
+    width: 100%;
+    text-align: center;
+  }
+  .profile-name {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    word-wrap: break-word;
+  }
+  .profile-role {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin-bottom: 0.8rem;
+    word-wrap: break-word;
+  }
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .contact-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #333;
+    color: #7fd9ff;
+    font-size: 1.4rem;
+    box-shadow: 0 0 8px transparent;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .contact-links a:hover {
+    background: #47c7ff;
+    box-shadow: 0 0 8px #47c7ff;
+  }
+  /* Memory Photos Section */
+  #memories {
+    margin-top: 4rem;
+  }
+  #memories h2 {
+    text-align: center;
+    margin-bottom: 1.6rem;
+  }
+  .memory-grid {
+    column-count: 4;
+    column-gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .memory-item {
+    break-inside: avoid;
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+    cursor: pointer;
+    transition: filter 0.3s ease;
+    background: #222;
+    display: flex;
+    flex-direction: column;
+  }
+  .memory-item:hover {
+    filter: brightness(1.15);
+  }
+  .memory-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .memory-caption {
+    padding: 0.3rem 0.7rem 0.8rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+    user-select: none;
+    font-style: italic;
+  }
+  /* Footer */
+  footer {
+    margin-top: 4rem;
+    text-align: center;
+    color: #555;
+    font-size: 0.85rem;
+    padding-bottom: 1.5rem;
+  }
+  /* Responsive tweaks */
+  @media (max-width: 1024px){
+    #profiles {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.6rem;
+    }
+    .profile-card {
+      max-width: 100%;
+    }
+    .memory-grid {
+      column-count: 3;
+      padding: 0 1rem;
+    }
+  }
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.4rem;
+    }
+    #profiles {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.4rem;
+    }
+    .contact-links a {
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+    }
+    .memory-grid {
+      column-count: 2;
+      padding: 0 1rem;
+    }
+  }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+      padding: 0 1rem;
+    }
+    #profiles {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+    .profile-card {
+      max-width: 100%;
+      padding: 1rem 1rem 1.2rem;
+    }
+    .contact-links a {
+      width: 28px;
+      height: 28px;
+      font-size: 1.1rem;
+    }
+    .memory-grid {
+      column-count: 1;
+      padding: 0 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Album Kenangan Angkatan 6</h1>
+  <p>SMP IP MA'ARIF AL FIRDAUS</p>
+</header>
+
+<main class="container">
+
+  <section id="profiles" aria-label="Profil guru dan murid">
+    <!-- Guru Profile -->
+    <div class="profile-card" tabindex="0" aria-label="Profil Guru">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/3x0SdL47/IMG-20250604-212014-1.jpg" alt="Foto profil Guru" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">IBU FROLENTA FANI </div>
+        <div class="profile-role">Wali kelas</div>
+        <div class="contact-links" aria-label="Kontak Guru">
+          <a href="" target="_blank" title="Email Guru" aria-label="Email Guru">📧</a>
+          <a href="https://wa.me/6288286874025" target="_blank" title="WhatsApp Guru" aria-label="WhatsApp Guru">💬</a>
+          <a href="https://www.instagram.com/fllorenta/" target="_blank" title="Instagram Guru" aria-label="Instagram Guru">📷</a>
+        </div>
+      </div>
+    </div>
+    <!-- Student Profiles -->
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 1">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/DZ5VzW9G/IMG-1707-copy.jpg" alt="Foto profil Siswa 1" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Abi Muhammad Nuh F</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Dina Kusuma">
+          <a href="abi782238@gmail.com" target="_blank" title="Email Dina Kusuma" aria-label="Email Dina Kusuma">📧</a>
+          <a href="https://wa.me/6285809867532" target="_blank" title="WhatsApp Dina Kusuma" aria-label="WhatsApp Dina Kusuma">💬</a>
+          <a href="https://www.instagram.com/abi._.muhammad_/" target="_blank" title="Instagram Dina Kusuma" aria-label="Instagram Dina Kusuma">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 2">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/mrDpSdJP/IMG-1648-copy.jpg" alt="Foto profil Siswa 2" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Farhan Aprilian Fauzi</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Rizky Pratama">
+          <a href=" " target="_blank" title="Email Rizky Pratama" aria-label="Email Rizky Pratama">📧</a>
+          <a href="https://wa.me/6282280459532" target="_blank" title="WhatsApp " aria-label="WhatsApp Rizky Pratama">💬</a>
+          <a href="https://www.instagram.com/sky_april_24/" target="_blank" title="Instagram Rizky Pratama" aria-label="Instagram Rizky Pratama">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 3">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/Z5qLkWcg/IMG-1659-copy.jpg" alt="Foto profil Siswa 3" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">M. Nur Fajri</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Sari Ningsih">
+          <a href="  " target="_blank" title="Email Sari Ningsih" aria-label="Email Sari Ningsih">📧</a>
+          <a href="https://wa.me/6285789024201" target="_blank" title="WhatsApp Sari Ningsih" aria-label="WhatsApp Sari Ningsih">💬</a>
+          <a href="https://instagram.com/" target="_blank" title="Instagram Sari Ningsih" aria-label="Instagram Sari Ningsih">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 4">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/R0k1nXB5/IMG-1738-copy.jpg" alt="Foto profil Siswa 4" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Rizky Farih Ardian</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Agus Santoso">
+          <a href=" " target="_blank" title="Email Agus Santoso" aria-label="Email Agus Santoso">📧</a>
+          <a href="https://wa.me/6281540014266" target="_blank" title="WhatsApp Agus Santoso" aria-label="WhatsApp Agus Santoso">💬</a>
+          <a href="https://instagram.com" target="_blank" title="Instagram Agus Santoso" aria-label="Instagram Agus Santoso">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 5">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/G26FGznn/IMG-1718-copy.jpg" alt="Foto profil Siswa 5" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Danar Gilang Firmansyah</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Lia Melati">
+          <a href=" " target="_blank" title="Email Lia Melati" aria-label="Email Lia Melati">📧</a>
+          <a href="https://wa.me/6285142348789" target="_blank" title="WhatsApp Lia Melati" aria-label="WhatsApp Lia Melati">💬</a>
+          <a href="https://www.instagram.com/danar_g_/" target="_blank" title="Instagram Lia Melati" aria-label="Instagram Lia Melati">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 6">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/NjLRJWGv/IMG-1653-copy.jpg" alt="Foto profil Siswa 6" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">M. Hafizur Rohman</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Bayu Wicaksono">
+          <a href="mailto:bayu.wicaksono@example.com" target="_blank" title="Email Bayu Wicaksono" aria-label="Email Bayu Wicaksono">📧</a>
+          <a href="https://wa.me/6287824800333" target="_blank" title="WhatsApp Bayu Wicaksono" aria-label="WhatsApp Bayu Wicaksono">💬</a>
+          <a href="https://www.instagram.com/muhamad.7056/" target="_blank" title="Instagram Bayu Wicaksono" aria-label="Instagram Bayu Wicaksono">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 7">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/x8tbgPWd/IMG-1730-copy.jpg" alt="Foto profil Siswa 7" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Hafiz Nur Fadilah</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Nina Marlina">
+          <a href="mailto:nina.marlina@example.com" target="_blank" title="Email Nina Marlina" aria-label="Email Nina Marlina">📧</a>
+          <a href="https://wa.me/6282183636831" target="_blank" title="WhatsApp Nina Marlina" aria-label="WhatsApp Nina Marlina">💬</a>
+          <a href="https://instagram.com/" target="_blank" title="Instagram Nina Marlina" aria-label="Instagram Nina Marlina">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 8">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/RhVW3HNx/IMG-1735-copy.jpg" alt="Foto profil Siswa 8" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Soni Saputra</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Joko Saputra">
+          <a href="mailto:joko.saputra@example.com" target="_blank" title="Email Joko Saputra" aria-label="Email Joko Saputra">📧</a>
+          <a href="https://wa.me/6285764081279" target="_blank" title="WhatsApp Joko Saputra" aria-label="WhatsApp Joko Saputra">💬</a>
+          <a href="https://www.instagram.com/saputra000000000/" target="_blank" title="Instagram Joko Saputra" aria-label="Instagram Joko Saputra">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 9">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/76zVBjVZ/IMG-1644-copy.jpg" alt="Foto profil Siswa 9" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Abu Bakar Adny Al-Hamid </div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Putri Ayu">
+          <a href="mailto:putri.ayu@example.com" target="_blank" title="Email Putri Ayu" aria-label="Email Putri Ayu">📧</a>
+          <a href="https://wa.me/6281368489459" target="_blank" title="WhatsApp Putri Ayu" aria-label="WhatsApp Putri Ayu">💬</a>
+          <a href="https://www.instagram.com/adny.alhamid/" target="_blank" title="Instagram Putri Ayu" aria-label="Instagram Putri Ayu">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 10">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/j2XymTJt/IMG-1666-copy.jpg" alt="Foto profil Siswa 10" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">M. Dzaky Ananda F</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Fajar Rahman">
+          <a href="mailto:fajar.rahman@example.com" target="_blank" title="Email Fajar Rahman" aria-label="Email Fajar Rahman">📧</a>
+          <a href="https://wa.me/6285273548088" target="_blank" title="WhatsApp Fajar Rahman" aria-label="WhatsApp Fajar Rahman">💬</a>
+          <a href="https://www.instagram.com/zkyy.a.f/" target="_blank" title="Instagram Fajar Rahman" aria-label="Instagram Fajar Rahman">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 11">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/W3S3P1SW/IMG-1698-copy.jpg" alt="Foto profil Siswa 11" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Arina Ulfatun Maghfiroh</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Tia Sari">
+          <a href="mailto:tia.sari@example.com" target="_blank" title="Email Tia Sari" aria-label="Email Tia Sari">📧</a>
+          <a href="https://wa.me/6285764093881" target="_blank" title="WhatsApp Tia Sari" aria-label="WhatsApp Tia Sari">💬</a>
+          <a href="https://www.instagram.com/_naulfa4/" target="_blank" title="Instagram Tia Sari" aria-label="Instagram Tia Sari">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 12">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/4d0DtC34/IMG-1747-copy.jpg" alt="Foto profil Siswa 12" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Isra pitri Widiastuti</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Rendra Putra">
+          <a href="mailto:rendra.putra@example.com" target="_blank" title="Email Rendra Putra" aria-label="Email Rendra Putra">📧</a>
+          <a href="https://wa.me/6285693573738" target="_blank" title="WhatsApp Rendra Putra" aria-label="WhatsApp Rendra Putra">💬</a>
+          <a href="https://www.instagram.com/justsrapw/" target="_blank" title="Instagram Rendra Putra" aria-label="Instagram Rendra Putra">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 13">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/hjZCw9F2/IMG-1723-copy.jpg" alt="Foto profil Siswa 13" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Maya Faulah</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Dewi Lestari">
+          <a href="mailto:dewi.lestari@example.com" target="_blank" title="Email Dewi Lestari" aria-label="Email Dewi Lestari">📧</a>
+          <a href="https://wa.me/6285783049540" target="_blank" title="WhatsApp Dewi Lestari" aria-label="WhatsApp Dewi Lestari">💬</a>
+          <a href="https://www.instagram.com/elesyiaa_/" target="_blank" title="Instagram Dewi Lestari" aria-label="Instagram Dewi Lestari">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 14">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/Nftcxc4L/IMG-1753-copy.jpg" alt="Foto profil Siswa 14" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Hesti Yunita Indri</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Andi Prasetyo">
+          <a href="mailto:andi.prasetyo@example.com" target="_blank" title="Email Andi Prasetyo" aria-label="Email Andi Prasetyo">📧</a>
+          <a href="https://wa.me/6285381993361" target="_blank" title="WhatsApp Andi Prasetyo" aria-label="WhatsApp Andi Prasetyo">💬</a>
+          <a href="https://www.instagram.com/hstndriiii09___/" target="_blank" title="Instagram Andi Prasetyo" aria-label="Instagram Andi Prasetyo">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 15">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/4xJXXg7j/IMG-1685-copy.jpg" alt="Foto profil Siswa 15" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Annisa Bela</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Sinta Maharani">
+          <a href="mailto:sinta.maharani@example.com" target="_blank" title="Email Sinta Maharani" aria-label="Email Sinta Maharani">📧</a>
+          <a href="https://wa.me/6287883545753" target="_blank" title="WhatsApp Sinta Maharani" aria-label="WhatsApp Sinta Maharani">💬</a>
+          <a href="https://www.instagram.com/annisabela44/" target="_blank" title="Instagram Sinta Maharani" aria-label="Instagram Sinta Maharani">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 16">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/MHVzpZYJ/IMG-1678-copy.jpg" alt="Foto profil Siswa 16" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Syifa Mayra Husna</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Eko Putra">
+          <a href="mailto:eko.putra@example.com" target="_blank" title="Email Eko Putra" aria-label="Email Eko Putra">📧</a>
+          <a href="https://wa.me/" target="_blank" title="WhatsApp Eko Putra" aria-label="WhatsApp Eko Putra">💬</a>
+          <a href="https://instagram.com/" target="_blank" title="Instagram Eko Putra" aria-label="Instagram Eko Putra">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 17">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/Z5Kz1xXS/IMG-1712-copy.jpg" alt="Foto profil Siswa 17" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Nadia Putri</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Fitri Handayani">
+          <a href="mailto:fitri.handayani@example.com" target="_blank" title="Email Fitri Handayani" aria-label="Email Fitri Handayani">📧</a>
+          <a href="https://wa.me/" target="_blank" title="WhatsApp Fitri Handayani" aria-label="WhatsApp Fitri Handayani">💬</a>
+          <a href="https://www.instagram.com/ndialstaa/" target="_blank" title="Instagram Fitri Handayani" aria-label="Instagram Fitri Handayani">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card" tabindex="0" aria-label="Profil Murid 18">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/4dKJjQ7d/IMG-1673-copy.jpg" alt="Foto profil Siswa 18" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Maryam Fadehel Khaleel AA</div>
+        <div class="profile-role">ALUMNI SMP AL FIRDAUS</div>
+        <div class="contact-links" aria-label="Kontak Yusuf Ramadhan">
+          <a href="mailto:yusuf.ramadhan@example.com" target="_blank" title="Email Yusuf Ramadhan" aria-label="Email Yusuf Ramadhan">📧</a>
+          <a href="https://wa.me/6282183296923" target="_blank" title="WhatsApp Yusuf Ramadhan" aria-label="WhatsApp Yusuf Ramadhan">💬</a>
+          <a href="https://www.instagram.com/hbbumrbhfdz/" target="_blank" title="Instagram Yusuf Ramadhan" aria-label="Instagram Yusuf Ramadhan">📷</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="memories" aria-label="Foto Kenangan">
+    <h2>Foto Kenangan Tekan Lama Untuk Mendownload</h2>
+    <div class="memory-grid">
+      <!-- 30 photo placeholders with captions -->
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 1">
+        <img src="https://i.postimg.cc/65pHKb6Y/Screenshot-2025-0529-091228-1.jpg" alt="Foto Kenangan 1" />
+        <div class="memory-caption">MPLS 2022</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 2">
+        <img src="https://i.postimg.cc/fLRY0L2X/IMG-20250529-091329-1.jpg" alt="Foto Kenangan 2" />
+        <div class="memory-caption">Upacara Bendera Pertama</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 3">
+        <img src="https://i.postimg.cc/q7j30rJ7/Screenshot-2025-0604-202529-1.jpg" alt="Foto Kenangan 3" />
+        <div class="memory-caption">Pemain Lama </div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 4">
+        <img src="https://i.postimg.cc/zXrtvP3T/IMG-20250607-WA0002.jpg" alt="Foto Kenangan 4" />
+        <div class="memory-caption">Siomay 1 </div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 5">
+        <img src="https://i.postimg.cc/pd4kHsgh/IMG-20250607-WA0004.jpg" alt="Foto Kenangan 5" />
+        <div class="memory-caption">Siomay 2</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 6">
+        <img src="https://i.postimg.cc/76z9YgkB/IMG-20250607-WA0009.jpg" alt="Foto Kenangan 6" />
+        <div class="memory-caption">Wisuda Angkatan 3</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 7">
+        <img src="https://i.postimg.cc/5yqm8bjL/IMG-20250607-WA0005.jpg" alt="Foto Kenangan 7" />
+        <div class="memory-caption">Wisuda Angkatan 3</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 8">
+        <img src="https://i.postimg.cc/wTg2gybV/IMG-20250607-WA0001.jpg" alt="Foto Kenangan 8" />
+        <div class="memory-caption">Kelas 8</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 9">
+        <img src="https://i.postimg.cc/yYjPd1Mz/IMG-20250607-WA0008.jpg" alt="Foto Kenangan 9" />
+        <div class="memory-caption">Lomba PDB</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 10">
+        <img src="https://i.postimg.cc/BbsTSkN6/20230925182414312.jpg" alt="Foto Kenangan 10" />
+        <div class="memory-caption">Agustus 2023</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 11">
+        <img src="https://i.postimg.cc/7L0J5X5T/IMG-20250607-WA0010.jpg" alt="Foto Kenangan 11" />
+        <div class="memory-caption">Agustus 2023</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 12">
+        <img src="https://i.postimg.cc/bJ0nBL8j/IMG-20230528-WA0015.jpg" alt="Foto Kenangan 12" />
+        <div class="memory-caption">Foto Bersama Angkatan 3</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 13">
+        <img src="https://i.postimg.cc/cJyrGYF1/IMG-20250607-WA0007.jpg" alt="Foto Kenangan 13" />
+        <div class="memory-caption">Bakar bakar 1</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 14">
+        <img src="https://i.postimg.cc/wv9M7zKS/IMG-20250607-WA0011.jpg" alt="Foto Kenangan 14" />
+        <div class="memory-caption">Bakar bakar 2</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 15">
+        <img src="https://i.postimg.cc/VvVkGbS8/IMG-20250607-WA0006.jpg" alt="Foto Kenangan 15" />
+        <div class="memory-caption">Bakar bakar 3</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 16">
+        <img src="https://i.postimg.cc/8kJcctxk/Gambar-Whats-App-2025-06-07-pukul-13-12-51-f06acae0.jpg" alt="Foto Kenangan 16" />
+        <div class="memory-caption">Hari Pahlawan </div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 17">
+        <img src="https://i.postimg.cc/TYTVZKkX/IMG-20250607-WA0015.jpg" alt="Foto Kenangan 17" />
+        <div class="memory-caption">Kultum</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 18">
+        <img src="https://i.postimg.cc/LsFBpP19/Screenshot-2025-06-07-at-22-20-03-Instagram.png" alt="Foto Kenangan 18" />
+        <div class="memory-caption">Halal bi Halal</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 19">
+        <img src="https://i.postimg.cc/SstMJbHQ/IMG-20250607-WA0013.jpg" alt="Foto Kenangan 19" />
+        <div class="memory-caption">Hari Guru</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 20">
+        <img src="https://i.postimg.cc/tJxYJZhD/Gambar-Whats-App-2025-06-07-pukul-21-33-57-79484c9c.jpg" alt="Foto Kenangan 20" />
+        <div class="memory-caption">Foto Terakhir Bersama Pak Sumary </div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 21">
+        <img src="https://i.postimg.cc/j5CcjbZv/IMG-20250520-WA0008.jpg" alt="Foto Kenangan 21" />
+        <div class="memory-caption">Foto Bersama Pak Agus Dan Fairus Tercinta</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 22">
+        <img src="https://i.postimg.cc/bvrkxRkw/IMG-20250607-WA0018.jpg" alt="Foto Kenangan 22" />
+        <div class="memory-caption">Finaly Munaqosah</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 23">
+        <img src="https://i.postimg.cc/65hvFPhQ/IMG-20250607-WA0020.jpg" alt="Foto Kenangan 23" />
+        <div class="memory-caption">Persiapan Wisuda</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 24">
+        <img src="https://i.postimg.cc/vZq3wTvD/Screenshot-2025-06-07-at-22-00-40-Instagram.png" alt="Foto Kenangan 24" />
+        <div class="memory-caption">Upacara</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 25">
+        <img src="https://i.postimg.cc/85WHvHgr/Screenshot-2025-06-07-at-22-01-47-Instagram.png" alt="Foto Kenangan 25" />
+        <div class="memory-caption">Pramukaan</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 26">
+        <img src="https://i.postimg.cc/YqgvwsfF/IMG-8238-copy.jpg" alt="Foto Kenangan 26" />
+        <div class="memory-caption">Lanang</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 27">
+        <img src="https://i.postimg.cc/L8YZhspJ/IMG-20250607-WA0024.jpg" alt="Foto Kenangan 27" />
+        <div class="memory-caption">End</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 28">
+        <img src="https://i.postimg.cc/nzcFjdD3/IMG-20250607-WA0021.jpg" alt="Foto Kenangan 28" />
+        <div class="memory-caption">End</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 29">
+        <img src="https://i.postimg.cc/Px95gWCK/IMG-8385-copy.jpg" alt="Foto Kenangan 29" />
+        <div class="memory-caption">Cewek</div>
+      </div>
+      <div class="memory-item" tabindex="0" aria-label="Foto Kenangan 30">
+        <img src="https://i.postimg.cc/28p5TxRS/IMG-8393-copy.jpg" alt="Foto Kenangan 30" />
+        <div class="memory-caption">End</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2024 Yearbook Kelas 9 - By Abi Muhammad Nuh</p>
+</footer>
+
+</body>
+</html>
